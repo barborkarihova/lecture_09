@@ -55,19 +55,23 @@ def pattern_search(sekvence, hledana_sekvence):
     return mnozina_indexu
 def binary_search(seznam_cisel, hledane_cislo):
     ntice_s_poradim = list(enumerate(seznam_cisel))
-
+    seznam_indexu = []
     while len(ntice_s_poradim) >= 1:
         if len(ntice_s_poradim) == 1:
             prostredek = 0
         else:
             prostredek = int((len(ntice_s_poradim)-1)/2)
         if ntice_s_poradim[prostredek][1] == hledane_cislo:
-            return ntice_s_poradim[prostredek][0]
+            seznam_indexu.append(ntice_s_poradim[prostredek][0])
+            ntice_s_poradim.remove(ntice_s_poradim[prostredek])
         elif ntice_s_poradim[prostredek][1] > hledane_cislo:
             ntice_s_poradim = ntice_s_poradim[:prostredek]
         elif ntice_s_poradim[prostredek][1] < hledane_cislo:
             ntice_s_poradim = ntice_s_poradim[prostredek+1:]
-    return "None"
+    if seznam_indexu:
+        return seznam_indexu
+    else:
+        return "None"
 
 
 
