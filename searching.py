@@ -44,8 +44,13 @@ def pattern_search(sekvence, hledana_sekvence):
     seznam_indexu = []
     while i < len(sekvence) - (delka_vzoru-1):
         sekvence_v_seznamu = sekvence[i:i+(delka_vzoru)]
+        if sekvence[i] != hledana_sekvence[0]:
+            i = i + 1
+            continue
         if sekvence_v_seznamu == hledana_sekvence:
             seznam_indexu.append(i)
+            i = i + delka_vzoru
+            continue
 
         i = i + 1
     mnozina_indexu = set(seznam_indexu)
@@ -58,7 +63,7 @@ def pattern_search(sekvence, hledana_sekvence):
 def main():
     sekvence = read_data("sequential.json", "dna_sequence")
     print(linear_search("unordered_numbers", 54))
-    print(pattern_search(sekvence, "AT"))
+    print(pattern_search(sekvence, "GG"))
 
 
 if __name__ == '__main__':
