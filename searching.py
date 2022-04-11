@@ -49,13 +49,22 @@ def pattern_search(sekvence, hledana_sekvence):
             continue
         if sekvence_v_seznamu == hledana_sekvence:
             seznam_indexu.append(i)
-            i = i + delka_vzoru
-            continue
 
         i = i + 1
     mnozina_indexu = set(seznam_indexu)
     return mnozina_indexu
+def binary_search(seznam_cisel, hledane_cislo):
+    ntice_s_poradim = list(enumerate(seznam_cisel))
 
+    while len(ntice_s_poradim) >= 1:
+        prostredek = int((len(ntice_s_poradim)-1)/2))
+        if ntice_s_poradim[prostredek][1] == hledane_cislo:
+            return ntice_s_poradim[prostredek][0]
+        elif ntice_s_poradim[prostredek][1] > hledane_cislo:
+            ntice_s_poradim = ntice_s_poradim[:prostredek-1]
+        elif ntice_s_poradim[prostredek][1] < hledane_cislo:
+            ntice_s_poradim = ntice_s_poradim[prostredek+1:]
+    return "None"
 
 
 
@@ -64,6 +73,7 @@ def main():
     sekvence = read_data("sequential.json", "dna_sequence")
     print(linear_search("unordered_numbers", 54))
     print(pattern_search(sekvence, "GG"))
+    binary_search(read_data("sequential.json", "ordered_numbers"), -1)
 
 
 if __name__ == '__main__':
