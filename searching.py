@@ -57,11 +57,14 @@ def binary_search(seznam_cisel, hledane_cislo):
     ntice_s_poradim = list(enumerate(seznam_cisel))
 
     while len(ntice_s_poradim) >= 1:
-        prostredek = int((len(ntice_s_poradim)-1)/2))
+        if len(ntice_s_poradim) == 1:
+            prostredek = 0
+        else:
+            prostredek = int((len(ntice_s_poradim)-1)/2)
         if ntice_s_poradim[prostredek][1] == hledane_cislo:
             return ntice_s_poradim[prostredek][0]
         elif ntice_s_poradim[prostredek][1] > hledane_cislo:
-            ntice_s_poradim = ntice_s_poradim[:prostredek-1]
+            ntice_s_poradim = ntice_s_poradim[:prostredek]
         elif ntice_s_poradim[prostredek][1] < hledane_cislo:
             ntice_s_poradim = ntice_s_poradim[prostredek+1:]
     return "None"
@@ -73,7 +76,7 @@ def main():
     sekvence = read_data("sequential.json", "dna_sequence")
     print(linear_search("unordered_numbers", 54))
     print(pattern_search(sekvence, "GG"))
-    binary_search(read_data("sequential.json", "ordered_numbers"), -1)
+    print(binary_search(read_data("sequential.json", "ordered_numbers"), -3))
 
 
 if __name__ == '__main__':
